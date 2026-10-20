@@ -36,3 +36,14 @@ Card.Header = function CardHeader({ children }: { children: React.ReactNode }) {
 Card.Body = function CardBody({ children }: { children: React.ReactNode }) {
   return <div className="text-sm text-muted-foreground">{children}</div>;
 };
+```
+
+2. **Polymorphic & Slot Patterns:**
+
+Support `asChild` composition (e.g., via `@radix-ui/react-slot`) to allow semantic element overrides without nesting unnecessary DOM nodes.
+
+3. **Strict Separation of Concerns:**
+
+Presentational Components: Dumb, highly reusable, styled via Tailwind + clsx/tailwind-merge. Zero data-fetching side effects.
+
+Container Components: Handle data orchestration, React Query/SWR hooks, and global state mapping.
