@@ -1,92 +1,88 @@
 ---
 name: linux-sandbox-git-editor
-description: Enforces file safety using temp files, explicit diff user approvals, and strict git workflow protocols when performing file manipulation (sed/python) in a Linux sandbox.
+description: Enforces file safety using temporary files, explicit diff approval, and strict Git workflow protocols when editing files in a Linux sandbox.
 ---
 
-# Linux Sandbox File & Git Execution Policy
+# Linux Sandbox File and Git Execution Policy
 
-You are operating within a Linux sandbox environment with direct access to file manipulation tools (`sed`, `python`, `awk`) and Git workflow commands. 
+You are operating in a Linux sandbox with access to file manipulation tools such as `sed`, `python`, and `awk`, as well as Git commands.
 
-To maintain total safety and auditability, **you must strictly follow this phased workflow for any text file editing or code changes**, even when running in autonomous/auto-approve mode.
+For every text-file edit or code change, follow this phased workflow, including when operating in autonomous or auto-approve mode.
 
----
+## Core rules
 
-## Core Operational Rules
+1. **Write to a temporary file first.** Never edit the original file inline (for example, with `sed -i`) or rewrite it directly. Write the modified content to a temporary file, such as one created with `mktemp` or `/tmp/<filename>.tmp`.
+2. **Review the diff.** Before replacing the original, inspect and show the exact unified diff between the original and temporary files. Use `diff -u` or `git diff --no-index`.
+3. **Get approval before replacing the original.** Ask the user to explicitly confirm before copying or moving the temporary file over the target, even in autonomous or auto-approve mode.
+4. **Get separate authorization for commits.** Do not commit without the user's explicit consent. First prepare the staged changes and proposed commit message, then ask whether the user wants you to run the commit or will run it themselves.
 
-1. **Staging via Temp Files First:** 
-   - Never perform inline editing (`sed -i`) or directly rewrite original target files (`/path/to/file`) in one step.
-   - Always output modified content into a temporary file first (e.g., using `mktemp` or naming it `/tmp/<filename>.tmp`).
+## Workflow
 
-2. **Diff Verification:**
-   - Inspect and present the exact unified diff (`diff -u original_file temp_file` or `git diff --no-index original_file temp_file`) to the user before overwriting the original file.
+### Phase 1: Prepare and review the change
 
-3. **Explicit User Gate Before In-Place Modification:**
-   - Ask for explicit user confirmation before copying/moving the temp file over the original target file, even if operating under higher autonomy modes.
+For a target file `<TARGET>`:
 
-4. **Staged Git Commits:**
-   - Draft the exact `git commit` message.
-   - Present the proposed commit message and staged files (`git status -s`) to the user.
-   - **Do NOT execute `git commit` directly.** Ask the user to either run the commit command themselves or explicitly authorize you to issue `git commit`.
+1. Create a temporary file and write the updated content to it. For example:
 
----
-
-## Execution Workflow Protocol
-
-### Phase 1: Staged Modification (Using `sed`, `python`, or scripts)
-When modifying text in target file `<TARGET>`:
-
-1. **Create workspace temporary file:**
    ```bash
-   TMPFILE=$(mktemp /tmp/edit_XXXXXX.txt)
+   TMPFILE=$(mktemp)
+   sed 's/old_pattern/new_pattern/g' <TARGET> > "$TMPFILE"
    ```
 
-   ```markdown
-```bash
-diff -u <TARGET> "$TMPFILE" || true
+   Or use Python:
 
-```
+   ```bash
+   python3 - <<'PY'
+   from pathlib import Path
 
-**Prompt for file update gate:**
+   source = Path("<TARGET>").read_text()
+   updated = source.replace("old_pattern", "new_pattern")
+   Path("/tmp/target.tmp").write_text(updated)
+   PY
+   ```
 
-Present the diff output to the user and request permission to replace `<TARGET>` with `$TMPFILE`.
+   In the Python example, use a suitable temporary path for the task.
 
-### Phase 2: In-Place Application & Cleanup
+2. Show the diff to the user:
 
-Upon explicit user approval to apply changes:
+   ```bash
+   diff -u <TARGET> "$TMPFILE" || true
+   ```
 
-1. Move or copy temporary file to target destination:
-```bash
-cp "$TMPFILE" <TARGET> && rm "$TMPFILE"
+3. Ask the user to approve replacing `<TARGET>` with the temporary file. Do not proceed until they explicitly approve.
 
-```
+### Phase 2: Apply the approved change
 
+After the user approves:
 
-2. Verify target file state via `git status` or `git diff <TARGET>`.
+1. Replace the target with the temporary file and remove the temporary file:
 
-### Phase 3: Git Commit Authorization Gate
+   ```bash
+   cp "$TMPFILE" <TARGET> && rm "$TMPFILE"
+   ```
 
-When changes are applied and ready to be committed:
+2. Verify the resulting file state with `git status` or `git diff`.
 
-1. Stage modified files:
-```bash
-git add <TARGET>
+### Phase 3: Commit only with explicit authorization
 
-```
+When the change is ready for a commit:
 
+1. Stage the target file:
 
-2. Display current staging status:
-```bash
-git status -s
+   ```bash
+   git add <TARGET>
+   ```
 
-```
+2. Show the staging status:
 
+   ```bash
+   git status -s
+   ```
 
-3. Draft proposed commit message:
+3. Present the proposed commit message and ask the user whether you should execute it or they will do so themselves. For example:
 
-Present the proposed commit command to the user:
+   > **Proposed commit message:** `feat(scope): concise update description`
+   >
+   > Would you like me to run `git commit -m "feat(scope): concise update description"`, or will you run the commit yourself?
 
-> **Proposed Commit Message:** `feat(scope): concise update description`
-> *Please review the staged changes above. Would you like me to run `git commit -m "..."`, or would you prefer to issue the commit command yourself?*
-
-
-4. Execute commit **ONLY** upon receipt of clear user consent.
+4. Run `git commit` only after receiving the user's clear consent.
