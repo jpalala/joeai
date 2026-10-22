@@ -49,7 +49,7 @@ The goal is simple: help AI agents build better frontend interfaces by giving th
 - UI testing and visual regression testing
 - Code quality and maintainability
 
-**Note: Partially curated from [AwesomeSkill.ai**](https://awesomeskill.ai/) — Attributing select community skills adapted and restructured for this registry.
+**Note: Partially curated from [AwesomeSkill.ai](https://awesomeskill.ai/)** — Attributing select community skills adapted and restructured for this registry.
 
 ### How It Works
 
@@ -60,19 +60,20 @@ The goal is simple: help AI agents build better frontend interfaces by giving th
 
 The registry focuses on discovery and retrieval. Skills remain independently maintained at their original sources where possible.
 
-MCP Integration
+### MCP Integration
 
 The registry is designed to expose skills through a Model Context Protocol (MCP) server so compatible AI coding agents can discover and retrieve them.
 
-Planned capabilities include:
+### Planned capabilities include:
 
-search_skills — Search for relevant frontend skills.
-list_skills — Browse available skills by category or framework.
-get_skill — Retrieve a skill's full instructions.
-get_skill_reference — Retrieve supporting documentation and examples.
-recommend_skills — Find suitable skills for a frontend task.
-list_sources — Inspect registered repositories and skill sources.
-Existing Projects Worth Studying
+`search_skills` — Search for relevant frontend skills.
+`list_skills` — Browse available skills by category or framework.
+`get_skill` — Retrieve a skill's full instructions.
+`get_skill_reference` — Retrieve supporting documentation and examples.
+`recommend_skills` — Find suitable skills for a frontend task.
+`list_sources` — Inspect registered repositories and skill sources.
+
+### Existing Projects Worth Studying
 
 This project builds on the broader ecosystem of agent skills and MCP tooling rather than attempting to reinvent existing skill formats.
 
@@ -96,14 +97,15 @@ A useful reference for discovering, managing, and installing agent skills across
 
 These projects provide useful foundations for understanding skill formats, distribution, and interoperability. Frontend Skills Registry focuses specifically on organizing and discovering skills for React, frontend design, and design-system workflows.
 
-Design Principles
-Discoverability first: Make relevant skills easy to find.
-Framework-aware: Support React and related frontend ecosystems without limiting the registry to one framework.
-Source transparency: Preserve original source information, licensing, and attribution.
-On-demand retrieval: Fetch detailed instructions only when they are needed.
-Composable skills: Allow agents to combine design, implementation, accessibility, and testing guidance.
-Open ecosystem: Make it possible to add new repositories and skill categories over time.
-Project Status
+### Design Principles
+ - Discoverability first: Make relevant skills easy to find.
+ - Framework-aware: Support React and related frontend ecosystems without limiting the registry to one framework.
+ - Source transparency: Preserve original source information, licensing, and attribution.
+ - On-demand retrieval: Fetch detailed instructions only when they are needed.
+ - Composable skills: Allow agents to combine design, implementation, accessibility, and testing guidance.
+ - Open ecosystem: Make it possible to add new repositories and skill categories over time.
+
+### Project Status
 
 This project is in early development.
 
@@ -111,7 +113,7 @@ The initial focus is on establishing the registry, defining a consistent skill m
 
 Planned future work includes richer search, skill recommendations, source synchronization, and additional frontend ecosystem integrations.
 
-Contributing
+### Contributing
 
 Contributions are welcome, especially:
 
@@ -123,7 +125,7 @@ Documentation, examples, and tests
 
 See CONTRIBUTING.md for contribution guidelines.
 
-License
+### License
 
 See LICENSE for the project's license.
 
