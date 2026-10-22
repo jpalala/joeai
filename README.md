@@ -2,7 +2,7 @@
 
 A README helps humans understand the project, decide whether to use it, and get started quickly. My primary skill though is fullstack, but I'd like to catalog the frontend skills I gained through the years. From UX design to some frontend css. 
 
-Frontend Skills Registry
+## Frontend Skills Registry
 
 A searchable registry of skills for React, frontend design, and design-system utilities — built for AI coding agents.
 
@@ -12,7 +12,7 @@ It brings together skills for UI design, React development, component architectu
 
 Instead of manually searching repositories for the right SKILL.md, agents can search the registry, inspect available skills, and fetch relevant instructions when needed through a Model Context Protocol (MCP) server.
 
-What Is This?
+### What Is This?
 
 Frontend Skills Registry is a registry and discovery layer for frontend-related AI agent skills.
 
@@ -22,7 +22,7 @@ The registry can index skills from curated repositories and other compatible sou
 
 The goal is simple: help AI agents build better frontend interfaces by giving them access to the right skills at the right time.
 
-What Can You Find Here?
+### What Can You Find Here?
 
 - React Development
 - React components, hooks, and composition patterns
@@ -49,14 +49,14 @@ What Can You Find Here?
 - UI testing and visual regression testing
 - Code quality and maintainability
 
-Curated from https://awesomeskill.ai/
+**Note: Partially curated from [AwesomeSkill.ai**](https://awesomeskill.ai/) — Attributing select community skills adapted and restructured for this registry.
 
-## How It Works
+### How It Works
 
-1. D for Discover — Find frontend skills using keywords, categories, frameworks, and tags.
-2. I for Inspect — Review a skill's description, source repository, license, and supported use cases.
-3. F for Fetch — Retrieve the skill instructions and relevant supporting files.
-4. A for Apply — Let the AI coding agent use those instructions while working on the frontend project.
+* **D for Discover** — Find frontend skills using keywords, categories, frameworks, and tags.
+* **I for Inspect** — Review a skill's description, source repository, license, and supported use cases.
+* **F for Fetch** — Retrieve the skill instructions and relevant supporting files.
+* **A for Apply** — Let the AI coding agent use those instructions while working on the frontend project.
 
 The registry focuses on discovery and retrieval. Skills remain independently maintained at their original sources where possible.
 
@@ -128,3 +128,24 @@ License
 See LICENSE for the project's license.
 
 Third-party skills may have their own licenses and attribution requirements. Each source should retain its original licensing information.
+
+Here is a clear, concise intro section you can place at the very top of your repository's `README.md` (or directly inside `SOUL.md`) to explain what `SOUL.md` does and how contributors should write skills when committing code.
+
+---
+
+### Purpose of `SOUL.md` in this Repository
+
+`SOUL.md` defines the operational persona and writing style required for all curated skills in this repository.
+
+#### Why it exists
+
+* **Unified Voice:** Ensures AI tools, contributor skill definitions, and code output follow the same direct, high-efficiency technical style.
+* **Low Overhead:** Prioritizes working code and intuitive UX over heavy documentation files.
+* **Consistency across Commits:** When contributors write new skills or update existing ones, they align their language pattern with the rules in `SOUL.md`.
+
+#### How to use it when contributing
+
+1. **Read `SOUL.md` before writing skills:** Understand the sentence constraints, technical tone, and prohibited conversational fluff.
+2. **Authoring Skill Specs:** Keep metadata descriptions under 10 words, avoid filler words, and prefer functional code examples over long prose.
+3. **Writing Code Comments:** Keep documentation out of separate markdown docs where possible. Put essential explanations directly inline next to complex logic.
+4. **Testing local persona:** Use the activation phrase (`"Joe, build this."` or `"Joe, review this."`) in your prompt runner or workflow tests to verify your newly added skill outputs match the repo's expected style before pushing a commit.
