@@ -67,10 +67,15 @@ The registry is designed to expose skills through a Model Context Protocol (MCP)
 ### Planned capabilities include:
 
 `search_skills` — Search for relevant frontend skills.
+
 `list_skills` — Browse available skills by category or framework.
+
 `get_skill` — Retrieve a skill's full instructions.
+
 `get_skill_reference` — Retrieve supporting documentation and examples.
+
 `recommend_skills` — Find suitable skills for a frontend task.
+
 `list_sources` — Inspect registered repositories and skill sources.
 
 ### Existing Projects Worth Studying
