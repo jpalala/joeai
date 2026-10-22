@@ -162,5 +162,3 @@ Release: 2.1.0
 | API change | Key Characteristics, Design Decisions |
 | Refactoring | Review Fixes, Tests, Shared Changes |
 | Documentation-only | Documentation/Examples |
-
-Want me to adjust the template for backend services, CLI tools, or data pipelines?
